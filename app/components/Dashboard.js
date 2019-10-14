@@ -1,52 +1,63 @@
 import React from 'react';
-import { View, StyleSheet, Text, Image, FlatList } from 'react-native';
+import { View, StyleSheet, Text, Image, FlatList, ScrollView, TouchableOpacity } from 'react-native';
 import NavigationBar from './NavigationBar';
 import Profile from './Profile'
 import Divider from './Divider'
 import Section from './Section'
 import RaceItem from './RaceItem'
-import {threeLastRaces} from '../helpers/utils/fixtures'
+import { threeLastRaces } from '../helpers/utils/fixtures'
 
 export default class Dashboard extends React.Component {
     render() {
         return (
-            <View>
+            <View style={styles.container}>
                 <NavigationBar title="Tableau de bord" />
-                <Profile name='Pierre Dufour' />
-                <Divider margin={4} color='#00000014'/>
-                <Section title='Profil' seeMore={true}>
-                    <View style={styles.schemeContainer}>
-                        <View style={styles.textContainer}>
-                            <Text style={styles.levelText}>Niveau</Text>
-                            <Text style={styles.medalsText}>Dernières médailles</Text>
-                        </View>
-                        <View style={styles.starBox}>
-                            <View style={styles.starContainer}>
-                                <Image style={styles.star} source={require('../assets/icons/round_star_border_black_40.png')} height={40} width={40} />
-                                <Text style={styles.starText}>12</Text>
+                <TouchableOpacity style={styles.floatingButton} onPress={() => alert('2')}>
+                    <Image source={require('../assets/icons/baseline_directions_car_white_36.png')} style={styles.carImage} />
+                </TouchableOpacity>
+                <ScrollView style={styles.scrollView}>
+                    <Profile name='Pierre Dufour' />
+                    <Divider margin={4} color='#00000014' />
+                    <Section title='Profil' seeMore={true}>
+                        <View style={styles.schemeContainer}>
+                            <View style={styles.textContainer}>
+                                <Text style={styles.levelText}>Niveau</Text>
+                                <Text style={styles.medalsText}>Dernières médailles</Text>
+                            </View>
+                            <View style={styles.starBox}>
+                                <View style={styles.starContainer}>
+                                    <Image style={styles.star} source={require('../assets/icons/round_star_border_black_40.png')} height={40} width={40} />
+                                    <Text style={styles.starText}>12</Text>
+                                </View>
                             </View>
                         </View>
-                    </View>
-                    <View style={styles.medalsContainer}>
-                        <View style={styles.medal}></View>
-                        <View style={styles.medal}></View>
-                        <View style={styles.medal}></View>
-                    </View>
-                </Section >
-                <Divider margin={4} color='#00000014'/>
-                <Section title='Courses' seeMore={true}>
-                    <FlatList
-                        data = {threeLastRaces}
-                        keyExtractor={(item) => item.id.toString()}
-                        renderItem={({item}) => <RaceItem race={item}/> }
-                    />
-                </Section>
+                        <View style={styles.medalsContainer}>
+                            <View style={styles.medal}></View>
+                            <View style={styles.medal}></View>
+                            <View style={styles.medal}></View>
+                        </View>
+                    </Section >
+                    <Divider margin={4} color='#00000014' />
+                    <Section title='Courses' seeMore={true}>
+                        <FlatList
+                            data={threeLastRaces}
+                            keyExtractor={(item) => item.id.toString()}
+                            renderItem={({ item }) => <RaceItem race={item} />}
+                        />
+                    </Section>
+                </ScrollView>
             </View >
         )
     }
 }
 
 const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+    },
+    scrollView: {
+        flex: 1,
+    },
     schemeContainer: {
         marginLeft: 40,
         marginRight: 40,
@@ -97,4 +108,21 @@ const styles = StyleSheet.create({
         backgroundColor: '#00000047',
         borderRadius: 4,
     },
+    floatingButton: {
+        backgroundColor: '#26C6DA',
+        position: 'absolute',
+        height: 56,
+        width: 56,
+        right: 16,
+        bottom: 16,
+        borderRadius: 28,
+        elevation: 6,
+    },
+    carImage: {
+        height: 24,
+        width: 24,
+        top: 16,
+        left: 16,
+    }
+
 });

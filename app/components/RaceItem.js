@@ -1,11 +1,11 @@
 import React from 'react'
-import { Text, View, StyleSheet } from 'react-native'
+import { Text, View, StyleSheet, TouchableOpacity } from 'react-native'
 import Divider from './Divider'
 
 export default class RaceItem extends React.Component {
     render() {
         return (
-            <View>
+            <TouchableOpacity onPress={() => alert('1')}>
                 <View style={styles.container}>
                     <View style={{ backgroundColor: this.props.race.color, ...styles.sticker }}>
                     </View>
@@ -19,7 +19,7 @@ export default class RaceItem extends React.Component {
                     </View>
                 </View>
                 <Divider margin={16} color='#0000000D'/>
-            </View>
+            </TouchableOpacity>
         )
     }
 }
