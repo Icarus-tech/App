@@ -124,5 +124,4 @@ const styles = StyleSheet.create({
         top: 16,
         left: 16,
     }
-
 });
